@@ -1,24 +1,23 @@
-import MySQLdb
+import pymysql
 import time
 from datetime import date
 
 host, user, pw, db, port = 'localhost', 'aplicacao', '123456', 'gerenciamento', 3306
-con = MySQLdb.connect(host, user, pw, db, port)
-c = con.cursor(MySQLdb.cursors.DictCursor)
+con = pymysql.connect(host, user, pw, db, port)
+c = con.cursor(pymysql.cursors.DictCursor)
 
 
-def carga(id_produto, quantidade, destino, data= ''):
+def carga(id_produto, quantidade, destino, descricao, data= ''):
 	global c, con
 
 	if not (data):
 		data = date.today()
 
-	query = str('(DEFAULT, "' + str(data) + '", "' + str(destino) + '", "' + str(id_produto) + '", ' + str(quantidade))
+	query = str('(DEFAULT, "' + str(data) + '", "' + str(destino) + '", "' + str(id_produto) + '", "' + str(quantidade) + '", "' + str(descricao) + '"')
 	query = 'INSERT INTO cargas VALUES ' + query + ')'
 
 	c.execute(query)
 	con.commit()
-	# print(query)
 
 
 def movimenta_estoque(id_produto, quantidade, operacao='subtração'):
@@ -36,8 +35,7 @@ def movimenta_estoque(id_produto, quantidade, operacao='subtração'):
 		c.execute(query)
 		con.commit()
 	else:
-		print('operação cancelada: volume a ser expedido é maior do que existente no estoque.')
-		return
+		return 'o volume a ser expedido é maior do que há no estoque'
 
 
 def retorna_estoque(id_produto):
@@ -59,5 +57,3 @@ def calcula_estoque(estoque, quantidade, operador='-'):
 	elif operador == '+':
 		novo_estoque = int(estoque) + int(quantidade)
 		return novo_estoque
-
-carga('MS001', '10', 'LUZ')
