@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+{% if current_user.is_authenticated %}
+<meta http-equiv="refresh" content="0; URL='http://127.0.0.1:5000/home'"/>
+{% else %}
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kode is a Premium Bootstrap Admin Template, It's responsive, clean coded and mobile friendly">
+  <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
+  <title>Comace - Estoque Fábrica</title>
+
+  <!-- ========== Css Files ========== -->
+  <link href="{{ url_for ('static', filename='css/root.css') }}" rel="stylesheet">
+  </head>
+  <body style="background-color: #F5F5F5;">
+    <div class="login-form">
+      <form action="" method="post">
+        <div class="top">
+          <h1>Registro</h1>
+          <h4>Cadastre-se para consultar o estoque</h4>
+        </div>
+        <div class="form-area">
+          <div class="group">
+            <input type="text" class="form-control" name = "user" placeholder="Usuário">
+            <i class="fa fa-user"></i>
+          </div>
+          <div class="group">
+            <input type="text" class="form-control" name = "regkey" placeholder="Chave de Registro">
+            <i class="fa fa-star"></i>
+          </div>
+          <div class="group">
+            <input type="password" class="form-control" name = "key" placeholder="Senha">
+            <i class="fa fa-key"></i>
+          </div>
+          <div class="group">
+            <input type="password" class="form-control" name = "repkey" placeholder="Repita sua senha">
+            <i class="fa fa-key"></i>
+          </div>
+          <button type="submit" class="btn btn-default btn-block">CONTINUAR</button>
+        </div>
+      </form>
+      <div class="footer-links row">
+        <div class="col-xs-6"><a href="/login"><i class="fa fa-sign-in"></i> Login</a></div>
+        <div class="col-xs-6 text-right"><a href="#"><i class="fa fa-lock"></i> Esqueci minha senha</a></div>
+      </div>
+    </div>
+    {% with messages = get_flashed_messages() %}
+       {% if messages %}
+          {% for message in messages %}
+             {{ message }}
+          {% endfor %}
+       {% endif %}
+    {% endwith %}
+
+</body>
+</html>
+{% endif %}

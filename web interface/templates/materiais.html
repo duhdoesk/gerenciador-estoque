@@ -1,0 +1,48 @@
+{% extends "base2.html" %}
+{% block config %}
+  <li class="nav-item">
+    <a class="nav-link" href="/">Início </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/produtos">Produtos </a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link" href="/materiais">Materiais <span class="sr-only">(current)</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/expedicao">Expedição </a>
+  </li>
+ {% endblock %}
+ {% block config2 %}
+   <li class="nav-item">
+     <a class="nav-link" href="/logout">Logout </a>
+   </li>
+ {% endblock %}
+{% block title %}Estoque de Materiais{% endblock %}
+{% block content %}
+<div class="panel-body">
+  <form class="form-inline" method="POST">
+    <div class="form-group">
+      <input type="text" name = "filter" class="form-control" id="exampleInputName2" placeholder="Material">
+    </div>
+    <button type="submit" formaction="/materiais" class="btn btn-default">Buscar</button>
+  </form>
+</div>
+<h5>Atualizado em: {{time}}</h5>
+<table class="table table-striped">
+	<tr>
+		<th scope="col">Material</th>
+		<th scope="col">Estoque</th>
+		<th scope="col">Estoque Minimo</th>
+		<th scope="col">Estoque / Mês</th>
+	</tr>
+	{% for material in materiais %}
+		<tr>
+			<td>{{material.material}}</td>
+			<td>{{material.estoque}}</td>
+			<td>{{material.est_min}}</td>
+			<td>{{material.est_mes}}</td>
+		</tr>
+	{% endfor %}
+</table>
+{% endblock %}

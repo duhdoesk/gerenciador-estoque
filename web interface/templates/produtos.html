@@ -1,0 +1,42 @@
+{% extends "base2.html" %}
+{% block config %}
+  <li class="nav-item">
+    <a class="nav-link" href="/">Início </a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link" href="/produtos">Produtos <span class="sr-only">(current)</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/materiais">Materiais </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/expedicao">Expedição </a>
+  </li>
+ {% endblock %}
+ {% block config2 %}
+   <li class="nav-item">
+     <a class="nav-link" href="/logout">Logout </a>
+   </li>
+ {% endblock %}
+{% block title %}Estoque de Produtos Acabados{% endblock %}
+{% block content %}
+<h5>Atualizado em: {{time}}</h5>
+<table class="table table-striped">
+	<tr>
+		<th scope="col">Produto</th>
+		<th scope="col">Cor</th>
+		<th scope="col">Condição</th>
+		<th scope="col">Aba</th>
+		<th scope="col">Estoque</th>
+	</tr>
+	{% for produto in produtos %}
+		<tr>
+			<td>{{produto.product}}</td>
+			<td>{{produto.color}}</td>
+			<td>{{produto.condition}}</td>
+			<td>{{produto.aba}}</td>
+			<td>{{produto.stock}}</td>
+		</tr>
+	{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+{% if current_user.is_authenticated %}
+<meta http-equiv="refresh" content="0; URL='http://127.0.0.1:5000/home'"/>
+{% else %}
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kode is a Premium Bootstrap Admin Template, It's responsive, clean coded and mobile friendly">
+  <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
+  <title>Comace - Estoque Fábrica</title>
+
+  <!-- ========== Css Files ========== -->
+  <link href="{{ url_for ('static', filename='css/root.css') }}" rel="stylesheet">
+  </head>
+  <body style="background-color: #f5f5f5;">
+
+    <div class="login-form">
+      <form action="" method="post">
+        <div class="top">
+          <img src="{{ url_for ('static', filename='img/logo_comace.png') }}" alt="icon" width="160" height="70">
+          <h1>Área de Login</h1>
+          <h4>Entre para consultar o estoque</h4>
+        </div>
+        <div class="form-area">
+          <div class="group">
+            <input type="text" class="form-control" name = "username" placeholder="Usuário">
+            <i class="fa fa-user"></i>
+          </div>
+          <div class="group">
+            <input type="password" class="form-control" name = "password" placeholder="Senha">
+            <i class="fa fa-key"></i>
+          </div>
+          <div class="checkbox checkbox-primary">
+            <input id="checkbox101" type="checkbox" checked>
+            <label for="checkbox101"> Lembrar-me</label>
+          </div>
+          <button type="submit" class="btn btn-default btn-block">ENTRAR</button>
+        </div>
+      </form>
+      <div class="footer-links row">
+        <div class="col-xs-6"><a href="/register"><i class="fa fa-external-link"></i> Registrar-se</a></div>
+        <div class="col-xs-6 text-right"><a href="#"><i class="fa fa-lock"></i> Esqueci minha senha</a></div>
+      </div>
+    </div>
+    {% with messages = get_flashed_messages() %}
+       {% if messages %}
+          {% for message in messages %}
+             {{ message }}
+          {% endfor %}
+       {% endif %}
+    {% endwith %}
+  </body>
+</html>
+{% endif %}

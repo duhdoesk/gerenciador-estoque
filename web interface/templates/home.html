@@ -1,0 +1,24 @@
+{% extends "base2.html" %}
+{% block config %}
+  <li class="nav-item active">
+    <a class="nav-link" href="/">Início <span class="sr-only">(current)</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/produtos">Produtos </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/materiais">Materiais </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/expedicao">Expedição </a>
+  </li>
+{% endblock %}
+{% block config2 %}
+  <li class="nav-item">
+    <a class="nav-link" href="/logout">Logout </a>
+  </li>
+{% endblock %}
+{% block title %}
+<img src="https://www.comace.com.br/m/site/img/quem_somos_logo_comace.png" alt="comace"><br><br>
+<h6>Desenvolvido por Eduardo Scaranari</h6>
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends "base2.html" %}
+{% block config %}
+  <li class="nav-item">
+    <a class="nav-link" href="/">Início </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/produtos">Produtos </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/materiais">Materiais </a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link" href="/expedicao">Expedição <span class="sr-only">(current)</span></a>
+  </li>
+{% endblock %}
+
+{% block config2 %}
+<li class="nav-item">
+  <a class="nav-link" href="/logout">Logout </a>
+</li>
+{% endblock %}
+
+{% block content %}
+  <!-- ========== Css Files ========== -->
+  <link href="{{ url_for ('static', filename='css/root.css') }}" rel="stylesheet">
+
+  </head>
+  <body>
+
+  <!-- Start Row -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-title">
+          Ferramenta de Expedição
+          <ul class="panel-tools">
+            <li><a class="icon minimise-tool"><i class="fa fa-minus"></i></a></li>
+            <li><a class="icon expand-tool"><i class="fa fa-expand"></i></a></li>
+            <li><a class="icon closed-tool"><i class="fa fa-times"></i></a></li>
+          </ul>
+        </div>
+
+        <div class="panel-body">
+
+          <form class="form-horizontal">
+            <div class="form-group">
+              <div class="row">
+                <label class="col-1 control-label form-label">Usuário:</label>
+                <div class="col-4">
+                </div>
+                <div class="col-4">
+                  <input type="text" id="destino" class="form-control" placeholder="Destino"><br>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <form class="form-horizontal">
+            <div class="form-group">
+              <div class="row">
+                <label class="col-1 control-label form-label">Produto:</label>
+                <div class="col">
+                  <select class="selectpicker" onchange="preenchedesc(value)" data-live-search="true" id='product_picker' style="width: 115px">
+                      <option></option>
+                    {% for produto in produtos %}
+                      <option>{{produto.id}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-5">
+                  <input type="text" class="form-control" placeholder="Descrição" id="descricao" readonly><br>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Estoque" readonly><br>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Quantidade" id="quantidade"><br><br><br>
+                </div>
+                <div class="col">
+                  <button type="button" onclick="adicionaLinha('listaprod')" class="btn btn-primary">Inserir</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-9">
+                </div>
+                <div class="col">
+                  <button type="submit" style="width: 115px" method='POST' formaction="/materiais" class="btn btn-success">Confirmar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+        <div class="panel-body table-responsive">
+          <table class="table table-striped" id="listaprod">
+            <col style="width: 5%">
+            <col style="width: 10%">
+            <col style="width: 40%">
+            <col style="width: 15%">
+            <col style="width: 15%">
+            <col style="width: 15%">
+            <thead>
+              <tr>
+                <td class="text-center"><i class="fa fa-trash"></i></td>
+                <td>ID</td>
+                <td>Produto</td>
+                <td>Estoque</td>
+                <td>Expedir</td>
+                <td>Destino</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              </tr>
+            </tbody>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Row -->
+
+  <script>
+    function adicionaLinha(listaprod) {
+      var tabela = document.getElementById(listaprod);
+      var numeroLinhas = tabela.rows.length;
+      var linha = tabela.insertRow(numeroLinhas);
+      var celula1 = linha.insertCell(0);
+      var celula2 = linha.insertCell(1);   
+      var celula3 = linha.insertCell(2);
+      var celula4 = linha.insertCell(3);
+      var celula5 = linha.insertCell(4);
+      var celula6 = linha.insertCell(5);
+      var picker = document.getElementById("product_picker");
+      var produto = document.getElementById("descricao");
+      var qtd = document.getElementById("quantidade");
+      var destino = document.getElementById("destino");
+      celula1.innerHTML = "<button type='button' class='btn-sm btn-light fa fa-trash' onclick='removeLinha(this)'></button>";
+      celula2.innerHTML = picker.value; 
+      celula3.innerHTML = 'X'; // implementar
+      celula4.innerHTML = 'Y'; // implementar
+      celula5.innerHTML = qtd.value;
+      celula6.innerHTML = destino.value;
+
+      document.getElementById("quantidade").clear()
+    }
+
+    function removeLinha(linha) {
+      var i=linha.parentNode.parentNode.rowIndex;
+      document.getElementById('listaprod').deleteRow(i);
+    }
+    
+    function preenchedesc(id_item) {
+      document.getElementById("descricao").value = "oi";
+    }
+  </script>
+
+
+{% endblock %}
